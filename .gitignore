@@ -1,0 +1,38 @@
+# Java 專案忽略的檔案
+
+# Maven / Gradle 編譯目錄
+target/
+build/
+
+# Java 編譯檔
+*.class
+
+# JAR / WAR / EAR 檔案
+*.jar
+*.war
+*.ear
+
+# 日誌檔案
+*.log
+
+# IDE 設定檔
+/.idea/
+/.vscode/
+/.settings/
+/.metadata/
+/bin/
+/out/
+
+# macOS 特殊檔案
+.DS_Store
+
+# Linux / Windows 相關檔案
+*.swp
+Thumbs.db
+
+
+# tree 專案結構.txt
+*.txt
+
+
+

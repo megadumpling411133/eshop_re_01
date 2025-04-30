@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+    "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+    <package name="home" extends="default" namespace="/home">
+        <!-- 
+            這個 package（封裝作用域）名稱為 "home"，對應 /home 命名空間，
+            用於處理首頁及相關功能的請求。
+        -->
+
+        <!-- 
+            index（首頁）Action：
+            - URL 路徑：/home/index
+            - 對應的類別：com.example.action.HomeAction
+            - 執行的方法：goHome()
+            - 成功時導向 `/WEB-INF/views/index.jsp`（首頁畫面）
+        -->
+        <action name="index" class="com.example.action.HomeAction" method="goHome">
+            <result name="success">/WEB-INF/views/index.jsp</result>
+        </action>
+
+        <!-- 
+            logout（登出）Action：
+            - URL 路徑：/home/logout
+            - 對應的類別：com.example.action.HomeAction
+            - 執行的方法：logOut()
+            - 當輸入無效（input）時，重新導向 `/login.jsp`（登入頁面）
+        -->
+        <action name="logout" class="com.example.action.HomeAction" method="logOut">
+            <result name="input" type="redirect">/login.jsp</result>
+        </action>
+
+        <!-- 
+            upload（檔案上傳）Action：
+            - URL 路徑：/home/upload
+            - 對應的類別：com.example.action.HomeAction
+            - 執行的方法：upload()
+            - 預設發生錯誤時導向 `/error.jsp`
+        -->
+        <action name="upload" class="com.example.action.HomeAction" method="upload">
+            <result>/error.jsp</result>
+        </action>
+
+        <!-- 
+            to_upload（跳轉到上傳畫面）Action：
+            - URL 路徑：/home/to_upload
+            - 對應的類別：com.example.action.HomeAction
+            - 執行的方法：toUpload()
+            - 成功時導向 `/WEB-INF/views/upload/upload.jsp`（上傳頁面）
+        -->
+        <action name="to_upload" class="com.example.action.HomeAction" method="toUpload">
+            <result name="success">/WEB-INF/views/upload/upload.jsp</result>
+        </action>
+
+    </package>
+</struts>

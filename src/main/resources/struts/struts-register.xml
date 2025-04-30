@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+    "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+    <!-- 註解：定義註冊頁面所需的動作處理，這個 package 用來處理註冊相關功能 -->
+    <package name="register" extends="default" namespace="/register">
+        <!-- 註解：定義當前 package 的攔截器堆疊 -->
+        <interceptors>
+            <!-- 註解：這裡定義了一個名為 "registerStack" 的攔截器堆疊，包含 model 驅動和檔案上傳的處理 -->
+            <interceptor-stack name="registerStack">
+                <interceptor-ref name="modelDrivenStack" />
+                <interceptor-ref name="fileUpload" />
+            </interceptor-stack>
+        </interceptors>
+
+        <!-- 註解：這是設置當前 package 下所有 action 預設使用的攔截器堆疊 -->
+        <default-interceptor-ref name="registerStack" />
+
+        <!-- 註解：處理註冊頁面請求的 action -->
+        <action name="register" class="com.example.action.RegisterAction" method="register">
+            <!-- 註解：當註冊成功後，轉跳到註冊頁面 -->
+            <result name="success">/WEB-INF/views/register/register.jsp</result>
+        </action>
+
+        <!-- 註解：處理註冊資料儲存的 action -->
+        <action name="save" class="com.example.action.RegisterAction" method="save">
+            <!-- 註解：如果發生錯誤，會導向錯誤頁面 -->
+            <result name="error" type="redirect">/error.jsp</result>
+            <!-- 註解：註冊成功後，跳轉到登入頁面 -->
+            <result name="success" type="redirect">/login.jsp</result>
+        </action>
+    </package>
+</struts>

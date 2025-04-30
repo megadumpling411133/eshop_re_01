@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.example.pojo.entity.Product" table="product">
+        <id name="id" column="id" type="integer">
+            <generator class="identity"/>
+        </id>
+        <property name="name" column="name" type="string" not-null="true"/>
+        <property name="description" column="description" type="string"/>
+        <property name="price" column="price" type="big_decimal" not-null="true"/>
+        <property name="stock" column="stock" type="integer" not-null="true"/>
+        <property name="imageUrl" column="image_url" type="string"/>
+        <property name="categoryId" column="category_id" type="integer"/>
+    </class>
+</hibernate-mapping>
+

@@ -1,0 +1,14 @@
+<configuration>
+    <!-- 註解：定義一個名為 "STDOUT" 的 ConsoleAppender，將日誌輸出到控制台 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- 註解：定義日誌的格式，這裡使用的格式包括時間、日誌等級、記錄器名稱及訊息內容 -->
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 註解：設置根日誌記錄器的日誌等級為 debug，並將剛剛定義的 appender 參照給它 -->
+    <root level="debug">
+        <appender-ref ref="STDOUT" />
+    </root>
+</configuration>
