@@ -1,0 +1,40 @@
+package com.example.action;
+
+import com.example.pojo.entity.Cart;
+import com.example.pojo.entity.User;
+import com.example.service.CartService;
+import com.opensymphony.xwork2.ActionSupport;
+import org.apache.struts2.interceptor.SessionAware;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Map;
+
+public class CartViewAction extends ActionSupport implements SessionAware {
+
+    @Autowired
+    private CartService cartService;
+
+    private Map<String, Object> session;
+    private Cart cart;
+
+    @Override
+    public String execute() {
+        User user = (User) session.get("user");
+        if (user == null) return ERROR;
+
+        // ✅ 從 service 取出該使用者的購物車（含明細）
+        cart = cartService.getCartWithDetails(user.getId());
+
+        return SUCCESS;
+    }
+
+    // Getter（供 JSP 使用）
+    public Cart getCart() {
+        return cart;
+    }
+
+    @Override
+    public void setSession(Map<String, Object> session) {
+        this.session = session;
+    }
+}

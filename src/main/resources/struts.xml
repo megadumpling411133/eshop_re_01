@@ -62,4 +62,6 @@
     <include file="struts/struts-register.xml"/>
     <include file="struts/struts-home.xml"/>
     <include file="struts/struts-product.xml"/>
+    <include file="struts/struts-cart.xml"/>
+    
 </struts>

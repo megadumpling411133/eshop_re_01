@@ -1,0 +1,23 @@
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+    "http://struts.apache.org/dtds/struts-2.1.dtd">
+
+<struts>
+    <package name="cart" namespace="/cart" extends="struts-default">
+    
+        <!-- 加入購物車 -->
+        <action name="add" class="com.example.action.CartAction">
+            <result name="success" type="redirectAction">
+                <param name="actionName">list</param>
+                <param name="namespace">/product</param>
+            </result>
+            <result name="error">/WEB-INF/views/error.jsp</result>
+        </action>
+
+        <!-- 顯示購物車內容 -->
+        <action name="view" class="com.example.action.CartViewAction">
+            <result name="success">/WEB-INF/views/cart/cart.jsp</result>
+        </action>
+
+    </package>
+</struts>

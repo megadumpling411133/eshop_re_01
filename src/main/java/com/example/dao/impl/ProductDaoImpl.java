@@ -31,4 +31,10 @@ public class ProductDaoImpl implements ProductDao {
         Query<Long> query = session.createQuery("select count(*) from Product", Long.class);
         return query.uniqueResult().intValue();
     }
+    
+    @Override
+    public Product getProductById(Integer id) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.get(Product.class, id);
+    }
 }

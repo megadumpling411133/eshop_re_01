@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.example.pojo.entity">
+    <class name="Cart" table="cart">
+        <!-- ✅ 改為統一的 getter 名稱 id -->
+        <id name="id" column="cart_id">
+            <generator class="identity"/>
+        </id>
+
+        <property name="userId" column="user_id"/>
+        <property name="createTime" column="create_time"/>
+
+        <!-- 1 對 多關聯 -->
+        <set name="details" cascade="all" inverse="true" fetch="join">
+            <key column="cart_id"/>
+            <one-to-many class="CartDetail"/>
+        </set>
+    </class>
+</hibernate-mapping>

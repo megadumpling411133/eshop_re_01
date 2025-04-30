@@ -26,4 +26,9 @@ public class ProductServiceImpl implements ProductService {
         int total = productDao.getTotalProducts();
         return (int) Math.ceil((double) total / pageSize);
     }
+    
+    @Override
+    public Product getProductById(Integer id) {
+        return productDao.getProductById(id);
+    }
 }
