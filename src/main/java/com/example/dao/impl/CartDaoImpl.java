@@ -36,15 +36,22 @@ public class CartDaoImpl implements CartDao {
         getSession().save(detail);
     }
 
+	/*
+	 * @Override public CartDetail getCartDetail(Integer cartId, long productId) {
+	 * return getSession().createQuery(
+	 * "from CartDetail where cart.cartId = :cartId and productId = :productId",
+	 * CartDetail.class) .setParameter("cartId", cartId) .setParameter("productId",
+	 * productId) .uniqueResult(); }
+	 */
     @Override
     public CartDetail getCartDetail(Integer cartId, long productId) {
         return getSession().createQuery(
-            "from CartDetail where cart.cartId = :cartId and productId = :productId", CartDetail.class)
+            "from CartDetail where cart.id = :cartId and productId = :productId", CartDetail.class)
             .setParameter("cartId", cartId)
             .setParameter("productId", productId)
             .uniqueResult();
     }
-
+    
     @Override
     public void updateCartDetail(CartDetail detail) {
         getSession().update(detail);

@@ -44,13 +44,16 @@
                 <tr>
                     <td>使用者名稱：</td>
                     <td>
-                        <input type="text" name="loginId" value='<c:out value="${loginId}"/>' required>
+                    	<!-- 寫死登入帳密 方便測試 記得解開 -->
+                        <%-- <input type="text" name="loginId" value='<c:out value="${loginId}"/>' required> --%>
+                        <input type="text" name="loginId" value='<c:out value="david"/>' required>
                     </td>
                 </tr>
                 <tr>
                     <td>密碼：</td>
                     <td>
-                        <input type="password" name="password" required>
+                        <!-- <input type="password" name="password" required> -->
+                        <input type="password" name="password" value="123456" required>
                     </td>
                 </tr>
                 <tr>
