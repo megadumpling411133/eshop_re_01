@@ -3,7 +3,7 @@ package com.example.pojo.entity;
 import java.math.BigDecimal;
 
 public class Product {
-    private Integer id;
+    private long id;
     private String name;
     private String description;
     private BigDecimal price;
@@ -12,10 +12,10 @@ public class Product {
     private Integer categoryId;
 
     // ✅ 統一命名：主鍵方法為 getId / setId
-    public Integer getId() {
+    public long getId() {
         return id;
     }
-    public void setId(Integer id) {
+    public void setId(long id) {
         this.id = id;
     }
 

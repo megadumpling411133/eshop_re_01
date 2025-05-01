@@ -37,7 +37,7 @@ public class CartDaoImpl implements CartDao {
     }
 
     @Override
-    public CartDetail getCartDetail(Integer cartId, Integer productId) {
+    public CartDetail getCartDetail(Integer cartId, long productId) {
         return getSession().createQuery(
             "from CartDetail where cart.cartId = :cartId and productId = :productId", CartDetail.class)
             .setParameter("cartId", cartId)

@@ -8,6 +8,6 @@ public interface CartDao {
 
     void saveCart(Cart cart);
     void saveCartDetail(CartDetail detail);
-    CartDetail getCartDetail(Integer cartId, Integer productId);
+    CartDetail getCartDetail(Integer cartId, long productId);
     void updateCartDetail(CartDetail detail);
 }

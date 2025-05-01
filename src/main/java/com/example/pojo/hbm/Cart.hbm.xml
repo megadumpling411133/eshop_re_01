@@ -10,7 +10,9 @@
             <generator class="identity"/>
         </id>
 
-        <property name="userId" column="user_id"/>
+<!--         <property name="userId" column="user_id"/> -->
+		<property name="userId" column="user_id" type="string"/> <!-- 修改之後專案會壞掉  -->
+
         <property name="createTime" column="create_time"/>
 
         <!-- 1 對 多關聯 -->

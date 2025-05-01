@@ -3,7 +3,7 @@ package com.example.pojo.entity;
 public class CartDetail {
     private Integer detailId;
     private Cart cart;
-    private Integer productId;
+    private long productId;
     private Integer quantity;
     private Double unitPrice;
 
@@ -24,14 +24,22 @@ public class CartDetail {
         this.cart = cart;
     }
 
-    public Integer getProductId() {
+//    public Integer getProductId() {
+//        return (int) productId;
+//    }
+//
+//    public void setProductId(long productId) {
+//        this.productId = (int) productId;
+//    }
+
+    public long getProductId() {
         return productId;
     }
 
-    public void setProductId(Integer productId) {
+    public void setProductId(long productId) {
         this.productId = productId;
     }
-
+    
     public Integer getQuantity() {
         return quantity;
     }

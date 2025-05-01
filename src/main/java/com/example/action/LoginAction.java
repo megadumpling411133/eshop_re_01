@@ -50,7 +50,7 @@ public class LoginAction extends BaseAction {
         // 如果用戶資料存在且登入 ID 正確
         if (user != null && !"".equals(user.getLoginId())) {
             // 登入成功，將用戶資料放入 session 中
-            getSession().setAttribute(ConstantName.SESSION_USER, user);
+            getSession().setAttribute(ConstantName.SESSION_USER, user.getLoginId());
             return SUCCESS;
         }
 

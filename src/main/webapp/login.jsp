@@ -2,13 +2,22 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 
-<%
+<%-- <%
     // 獲取當前會話中的用戶物件
     User user = (User) session.getAttribute("user");
 
     // 如果用戶已登入，則重新導向到首頁
     if (user != null && !"".equals(user.getLoginId())) {
         response.sendRedirect("home/index");
+    }
+%>
+ --%>
+
+<%
+    User user = (User) session.getAttribute("user");
+
+    if (user != null && !"".equals(user.getLoginId())) {
+        response.sendRedirect("product/list.action");
     }
 %>
 

@@ -13,7 +13,7 @@ public interface CartService {
      * @param productId 商品 ID
      * @param unitPrice 當下商品價格（BigDecimal）
      */
-    void addProductToCart(String userId, Integer productId, BigDecimal unitPrice);
+    void addProductToCart(String userId, long productId, BigDecimal unitPrice);
 
     /**
      * 取得目前使用者的購物車資料（包含所有明細）

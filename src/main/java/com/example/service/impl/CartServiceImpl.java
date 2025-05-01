@@ -20,7 +20,7 @@ public class CartServiceImpl implements CartService {
 
     // ✅ 加入購物車（資料庫）
     @Override
-    public void addProductToCart(String userId, Integer productId, BigDecimal unitPrice) {
+    public void addProductToCart(String userId, long productId, BigDecimal unitPrice) {
         Cart cart = cartDao.getCartByUserId(userId);
         if (cart == null) {
             cart = new Cart();

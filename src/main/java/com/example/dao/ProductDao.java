@@ -7,5 +7,7 @@ public interface ProductDao {
     List<Product> findAllProducts(int page, int pageSize);
     int getTotalProducts();
     
-    Product getProductById(Integer id);
+    
+	Product getProductById(long id);
+
 }

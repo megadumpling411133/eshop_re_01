@@ -3,18 +3,16 @@
     "http://struts.apache.org/dtds/struts-2.1.dtd">
 
 <struts>
-    <package name="cart" namespace="/cart" extends="struts-default">
-    
-        <!-- 加入購物車 -->
-        <action name="add" class="com.example.action.CartAction">
-            <result name="success" type="redirectAction">
-                <param name="actionName">list</param>
-                <param name="namespace">/product</param>
+    <package name="cart" namespace="/cart" extends="struts-default,json-default">
+
+        <!-- ✅ AJAX 加入購物車：回傳 JSON 給 JS -->
+        <action name="add" class="com.example.action.CartAction" method="addToCart">
+            <result name="json" type="json">
+                <param name="root">jsonResult</param>
             </result>
-            <result name="error">/WEB-INF/views/error.jsp</result>
         </action>
 
-        <!-- 顯示購物車內容 -->
+        <!-- ✅ 顯示購物車內容頁 -->
         <action name="view" class="com.example.action.CartViewAction">
             <result name="success">/WEB-INF/views/cart/cart.jsp</result>
         </action>
