@@ -4,9 +4,15 @@
     "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
     <package name="order" namespace="/order" extends="default">
+
+        <!-- ✅ 保證使用 globalStack 攔截器 -->
+        <default-interceptor-ref name="globalStack" />
+
+        <!-- ✅ 結帳功能需登入（由攔截器處理） -->
         <action name="checkout" class="com.example.action.OrderAction">
             <result name="success">/WEB-INF/views/order/success.jsp</result>
             <result name="error" type="redirect">/cart/view.action</result>
         </action>
+
     </package>
 </struts>

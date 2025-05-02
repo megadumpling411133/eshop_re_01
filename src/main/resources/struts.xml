@@ -1,69 +1,40 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE struts PUBLIC
-	"-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
-	"http://struts.apache.org/dtds/struts-2.1.dtd">
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+    "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
-	<!-- 註解：struts-default.xml 位於 struts2-core.jar 包的根目錄，提供原始的常數、bean、package 及攔截器設定 -->
-	<!-- 註解：定義抽象的 package：<package name="struts-default" abstract="true" strict-method-invocation="true"> -->
-	<!-- 註解：預設的攔截器設定：<default-interceptor-ref name="defaultStack"/> -->
-	<include file="struts-default.xml" />
 
-	<!-- 註解：設定常數，這些設定對應於 org.apache.struts2.StrutsConstants 類別中的變數 -->
-	<!-- 註解：default.properties 位於 struts2-core.jar 包，裡面配置了全域的預設常數 -->
-	<!-- 註解：Struts 預設的檔案上傳限制為 2MB，這裡修改為 2GB -->
-	<constant name="struts.multipart.maxSize" value="2097152000" />
-	<!-- 註解：定義 action 請求的副檔名 -->
-	<constant name="struts.action.extension" value="action,do,," />
-	<!-- 註解：繼承 struts-default，struts-default package 是抽象定義，表示沒有 action，只是用來繼承的攔截器 -->
-	<package name="default" extends="struts-default">
-		<interceptors>
-			<!-- 註解：自訂的攔截器 -->
-			<interceptor name="authenticationInterceptor"
-				class="com.example.interceptor.AuthenticationInterceptor" />
-
-			<interceptor-stack name="globalStack">
-				<!-- 註解：引用自訂的攔截器 authenticationInterceptor -->
-				<interceptor-ref name="authenticationInterceptor" />
-				<!-- 註解：modelDrivenStack 包含 modelDriven 和 basicStack，modelDriven 用於將參數封裝成 model 物件 -->
-				<!-- 註解：basicStack 用來攔截請求中的參數並設定到全域變數，這些攔截器在 struts-default 中已經定義 -->
-				<interceptor-ref name="fileUpload" />
-				<interceptor-ref name="modelDrivenStack" />
-			</interceptor-stack>
-
-		</interceptors>
-
-		<!-- 註解：設定當前 package 中所有 action 預設使用的攔截器堆疊 -->
-		<!-- 註解：action 最終使用的攔截器堆疊一定要包含 basicStack -->
-		<default-interceptor-ref name="globalStack" />
-
-		<!-- 註解：全域結果設定 -->
-		<global-results>
-			<result name="login" type="redirect">
-				/login.jsp
-			</result>
-			<result name="error" type="redirect">
-				/404.html
-			</result>
-			<result name="other" type="redirectAction">
-				<param name="actionName">login</param>
-				<param name="namespace">/</param>
-			</result>
-		</global-results>
-
-        <!-- 註解：全域例外處理配置 -->
-		<global-exception-mappings>
-			<exception-mapping exception="java.lang.Exception"
-				result="error" />
-		</global-exception-mappings>
-	</package>
-	
-	<!-- 註解：include 不是將內容插入，而是解析並載入另一個配置檔 -->
     <include file="struts/struts-login.xml"/>
     <include file="struts/struts-register.xml"/>
     <include file="struts/struts-home.xml"/>
     <include file="struts/struts-product.xml"/>
     <include file="struts/struts-cart.xml"/>
     <include file="struts/struts-order.xml"/>
-    
-    
+
+    <constant name="struts.multipart.maxSize" value="2097152000"/>
+    <constant name="struts.action.extension" value="action,do,,"/>
+
+    <package name="default" extends="struts-default">
+        <interceptors>
+            <interceptor name="authenticationInterceptor"
+                         class="com.example.interceptor.AuthenticationInterceptor"/>
+            <interceptor-stack name="globalStack">
+                <interceptor-ref name="authenticationInterceptor"/>
+                <interceptor-ref name="fileUpload"/>
+                <interceptor-ref name="modelDrivenStack"/>
+            </interceptor-stack>
+        </interceptors>
+
+        <default-interceptor-ref name="globalStack"/>
+
+        <global-results>
+            <result name="login" type="redirect">/login.jsp</result>
+            <result name="error" type="redirect">/404.html</result>
+            <result name="other" type="redirectAction">
+                <param name="actionName">login</param>
+                <param name="namespace">/</param>
+            </result>
+        </global-results>
+    </package>
+
 </struts>

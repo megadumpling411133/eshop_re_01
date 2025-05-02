@@ -11,5 +11,6 @@ public interface CartDao {
     CartDetail getCartDetail(Integer cartId, long productId);
     void updateCartDetail(CartDetail detail);
     void deleteCartDetailsByCartId(Integer cartId);
+    void deleteCart(Cart cart);
 
 }

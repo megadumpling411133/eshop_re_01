@@ -27,31 +27,15 @@ public class AuthenticationInterceptor implements Interceptor {
 
     @Override
     public String intercept(ActionInvocation invocation) throws Exception {
-        // ✅ 使用字串 userId 判斷登入狀態
-        String userId = getLoggedInUserId();
+        // 從 session 中取得使用者物件
+        Map<String, Object> session = ActionContext.getContext().getSession();
+        Object userObj = session.get(ConstantName.SESSION_USER);
 
-        if (userId != null && !userId.isEmpty()) {
-            // 已登入，繼續執行
-            return invocation.invoke();
+        if (userObj instanceof com.example.pojo.entity.User) {
+            return invocation.invoke(); // ✅ 已登入
         }
 
-        // 未登入，跳轉至登入頁面
+        // ❌ 未登入
         return "login";
     }
-
-    /**
-     * 從 Session 中取得目前登入的使用者 ID（字串）。
-     * 
-     * @return 若使用者已登入，返回 userId 字串，否則返回 null
-     */
-    private String getLoggedInUserId() {
-        ActionContext ctx = ActionContext.getContext();
-        Map<String, ?> session = ctx.getSession();
-
-        Object value = session.get(ConstantName.SESSION_USER);
-        if (value instanceof String) {
-            return (String) value;
-        }
-        return null;
-    }
-}
+} 

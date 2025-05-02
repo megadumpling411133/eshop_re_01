@@ -18,6 +18,7 @@ public class OrderAction extends ActionSupport implements SessionAware {
 
     @Override
     public String execute() {
+    	System.out.println("✅ 進入 OrderAction，session user = " + session.get(ConstantName.SESSION_USER));
         User user = (User) session.get(ConstantName.SESSION_USER);
         if (user == null) {
             addActionMessage("請先登入再結帳");
@@ -30,6 +31,9 @@ public class OrderAction extends ActionSupport implements SessionAware {
             return SUCCESS;
         } catch (RuntimeException e) {
             // ✅ 捕捉 Service 層拋出的錯誤（例如購物車為空）
+			/* addActionMessage(e.getMessage()); */
+        	e.printStackTrace(); // 🔥 加這行：印出錯誤堆疊
+            System.out.println("❌ 結帳失敗：" + e.getMessage()); // 🔥 顯示錯誤原因
             addActionMessage(e.getMessage());
             return ERROR;
         }

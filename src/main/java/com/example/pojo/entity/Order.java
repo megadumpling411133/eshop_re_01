@@ -1,15 +1,15 @@
 package com.example.pojo.entity;
 
 import java.util.Date;
-import java.util.List;
+import java.util.Set; // ✅ 改成 Set
 
 public class Order {
     private Integer orderId;
-    private String userId; // ✅ 改為 String
+    private String userId; // ✅ 必須為 String
     private Date orderDate;
     private Double totalAmount;
     private String status;
-    private List<OrderDetail> details;
+    private Set<OrderDetail> details; // ✅ 改為 Set
 
     public Integer getId() {
         return orderId;
@@ -51,14 +51,15 @@ public class Order {
         this.status = status;
     }
 
-    public List<OrderDetail> getDetails() {
+    public Set<OrderDetail> getDetails() {
         return details;
     }
 
-    public void setDetails(List<OrderDetail> details) {
+    public void setDetails(Set<OrderDetail> details) {
         this.details = details;
     }
 }
+
 
 /*
  * package com.example.pojo.entity;

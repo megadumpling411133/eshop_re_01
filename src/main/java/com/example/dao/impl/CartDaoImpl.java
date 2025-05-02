@@ -18,16 +18,15 @@ public class CartDaoImpl implements CartDao {
         return sessionFactory.getCurrentSession();
     }
 
-    // ✅ 使用 HQL + fetch join 查出購物車及其明細
+    // ✅ 使用 HQL + fetch join 查出購物車及其明細與商品
     @Override
     public Cart getCartByUserId(String userId) {
         Cart cart = getSession().createQuery(
-            /*"from Cart c left join fetch c.details where c.userId = :userId", Cart.class)*/
-        	"select distinct c from Cart c " +
+            "select distinct c from Cart c " +
             "left join fetch c.details d " +
             "left join fetch d.product " +
             "where c.userId = :userId", Cart.class)
-        	.setParameter("userId", userId)
+            .setParameter("userId", userId)
             .uniqueResult();
 
         // ✅ DEBUG 用
@@ -58,7 +57,7 @@ public class CartDaoImpl implements CartDao {
     @Override
     public CartDetail getCartDetail(Integer cartId, long productId) {
         return getSession().createQuery(
-                "from CartDetail where cart.id = :cartId and productId = :productId", CartDetail.class)
+            "from CartDetail where cart.id = :cartId and productId = :productId", CartDetail.class)
             .setParameter("cartId", cartId)
             .setParameter("productId", productId)
             .uniqueResult();
@@ -68,7 +67,8 @@ public class CartDaoImpl implements CartDao {
     public void updateCartDetail(CartDetail detail) {
         getSession().update(detail);
     }
-    
+
+    // ❌ 不再使用，建議避免手動刪除明細以防 stale 狀況
     @Override
     public void deleteCartDetailsByCartId(Integer cartId) {
         getSession().createQuery("delete from CartDetail where cart.id = :cartId")
@@ -76,4 +76,9 @@ public class CartDaoImpl implements CartDao {
             .executeUpdate();
     }
 
+    // ✅ 僅刪除主表，讓 Hibernate cascade 刪除明細
+    @Override
+    public void deleteCart(Cart cart) {
+        getSession().delete(cart);
+    }
 }

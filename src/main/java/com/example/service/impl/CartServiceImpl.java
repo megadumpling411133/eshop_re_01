@@ -54,13 +54,13 @@ public class CartServiceImpl implements CartService {
     public Cart getCartByUserId(String userId) {
         return cartDao.getCartByUserId(userId);
     }
-    
+
+    // ✅ 僅刪除主表，讓 Hibernate cascade 刪除明細
     @Override
     public void clearCart(String userId) {
         Cart cart = cartDao.getCartByUserId(userId);
         if (cart != null) {
-            cartDao.deleteCartDetailsByCartId(cart.getId());
+            cartDao.deleteCart(cart); // ❗這行會自動 cascade 刪除明細
         }
     }
-
 }

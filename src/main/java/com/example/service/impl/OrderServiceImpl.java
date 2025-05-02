@@ -22,32 +22,32 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void createOrder(Order order) {
-    	System.out.println("【DEBUG】createOrder 呼叫：orderId = " + order.getId());
+        System.out.println("【DEBUG】createOrder 呼叫：orderId = " + order.getId());
         orderDao.saveOrder(order); // cascade 自動存 detail
     }
 
     @Override
     public void checkout(String userId) {
-    	System.out.println("【DEBUG】checkout 開始，userId = " + userId);
+        System.out.println("【DEBUG】checkout 開始，userId = " + userId);
+
         // ✅ 1. 查詢購物車
         Cart cart = cartService.getCartWithDetails(userId);
         if (cart == null || cart.getDetails() == null || cart.getDetails().isEmpty()) {
-        	System.out.println("【DEBUG】購物車為空");
+            System.out.println("【DEBUG】購物車為空");
             throw new RuntimeException("購物車為空，無法結帳");
         }
 
         // ✅ 2. 建立 Order 物件
         Order order = new Order();
-		/*
-		 * order.setUserId(Integer.valueOf(userId)); // 轉型成 int（資料庫為 int）
-		 */
         order.setUserId(userId); // ✅ 正確：userId 本來就是 String
         order.setOrderDate(new Date());
         order.setStatus("處理中");
 
         // ✅ 3. 轉換 CartDetail 為 OrderDetail
         double total = 0.0;
-        List<OrderDetail> orderDetails = new ArrayList<>();
+		/* List<OrderDetail> orderDetails = new ArrayList<>(); */
+        Set<OrderDetail> orderDetails = new HashSet<>();
+
         for (CartDetail item : cart.getDetails()) {
             OrderDetail detail = new OrderDetail();
             detail.setOrder(order); // 建立關聯
