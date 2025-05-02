@@ -24,7 +24,7 @@ public class CartAction extends ActionSupport implements SessionAware {
     private Map<String, Object> session;
     private String prodId;
 
-    // ✅ 改為 Map 才能被 json result 正確解析
+    // ✅ 回傳 JSON 給前端
     private Map<String, Object> jsonResult = new HashMap<>();
 
     public Map<String, Object> getJsonResult() {
@@ -40,13 +40,17 @@ public class CartAction extends ActionSupport implements SessionAware {
         this.session = session;
     }
 
-    // ✅ AJAX 專用方法
+    // ✅ AJAX 專用方法：加入購物車
     public String addToCart() {
-    	long prodIdConvert = Long.parseLong(prodId);
-        String loginId = session.get(ConstantName.SESSION_USER)==null?null:(String)session.get(ConstantName.SESSION_USER);
-        if (prodId == null || loginId == null) {
-            jsonResult.put("success", "加入購物車成功");
-            jsonResult.put("message", "未登入或商品ID無效");
+        long prodIdConvert = Long.parseLong(prodId);
+
+        // ✅ 取得完整 User 物件
+        User user = (User) session.get(ConstantName.SESSION_USER);
+        String userId = (user != null) ? user.getId() : null;
+
+        if (prodId == null || userId == null) {
+            jsonResult.put("success", false);
+            jsonResult.put("message", "未登入或商品 ID 無效");
             return "json";
         }
 
@@ -57,13 +61,15 @@ public class CartAction extends ActionSupport implements SessionAware {
             return "json";
         }
 
-        cartService.addProductToCart(loginId, prodIdConvert, product.getPrice());
+        // ✅ 呼叫 service 寫入 cart 資料
+        cartService.addProductToCart(userId, prodIdConvert, product.getPrice());
+
         jsonResult.put("success", true);
         jsonResult.put("message", "成功加入購物車");
-        
+
         System.out.println("【DEBUG】prodId = " + prodId);
-        System.out.println("【DEBUG】user = " + session.get("user"));
-        
+        System.out.println("【DEBUG】userId = " + userId);
+
         return "json";
     }
 }

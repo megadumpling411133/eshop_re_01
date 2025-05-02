@@ -22,4 +22,9 @@ public interface CartService {
      * @return 對應 Cart 實體，包含 Set<CartDetail>
      */
     Cart getCartWithDetails(String userId);
+
+    /**
+     * 查詢購物車（含明細，用於 service-to-service 呼叫，例如強制 fetch join）
+     */
+    Cart getCartByUserId(String userId);
 }

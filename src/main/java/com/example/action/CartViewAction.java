@@ -1,5 +1,6 @@
 package com.example.action;
 
+import com.example.constant.ConstantName;
 import com.example.pojo.entity.Cart;
 import com.example.pojo.entity.User;
 import com.example.service.CartService;
@@ -19,16 +20,24 @@ public class CartViewAction extends ActionSupport implements SessionAware {
 
     @Override
     public String execute() {
-        User user = (User) session.get("user");
+        // ✅ 取得完整 User 實體
+        User user = (User) session.get(ConstantName.SESSION_USER);
         if (user == null) return ERROR;
 
-        // ✅ 從 service 取出該使用者的購物車（含明細）
+        // ✅ 從 service 查詢購物車（含明細）
         cart = cartService.getCartWithDetails(user.getId());
+
+        // ✅ DEBUG 印出
+        System.out.println("CartViewAction: execute()");
+        System.out.println("【DEBUG】user id: " + user.getId());
+        System.out.println("【DEBUG】cart: " + cart);
+        System.out.println("【DEBUG】details: " + (cart != null ? cart.getDetails() : "null"));
+        System.out.println("【DEBUG】details size: " + (cart != null && cart.getDetails() != null ? cart.getDetails().size() : "null"));
 
         return SUCCESS;
     }
 
-    // Getter（供 JSP 使用）
+    // ✅ 給 JSP 使用的 getter
     public Cart getCart() {
         return cart;
     }

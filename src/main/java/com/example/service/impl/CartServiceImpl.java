@@ -18,13 +18,13 @@ public class CartServiceImpl implements CartService {
     @Autowired
     private CartDao cartDao;
 
-    // ✅ 加入購物車（資料庫）
+    // ✅ 加入商品到購物車
     @Override
     public void addProductToCart(String userId, long productId, BigDecimal unitPrice) {
         Cart cart = cartDao.getCartByUserId(userId);
         if (cart == null) {
             cart = new Cart();
-            cart.setUserId(userId);
+            cart.setUserId(userId); // 這裡 userId 為 user.id
             cart.setCreateTime(new Date());
             cartDao.saveCart(cart);
         }
@@ -43,9 +43,15 @@ public class CartServiceImpl implements CartService {
         }
     }
 
-    // ✅ 查詢購物車與明細（顯示用）
+    // ✅ 查詢購物車（含明細）
     @Override
     public Cart getCartWithDetails(String userId) {
+        return getCartByUserId(userId);
+    }
+
+    // ✅ DAO 採用 fetch join 查詢
+    @Override
+    public Cart getCartByUserId(String userId) {
         return cartDao.getCartByUserId(userId);
     }
 }

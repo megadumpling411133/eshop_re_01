@@ -11,7 +11,9 @@
 <body>
 <div class="container mt-4">
     <h2 class="mb-4">商品列表</h2>
-    
+    <a href="${pageContext.request.contextPath}/cart/view.action" class="btn btn-outline-success">
+            查看購物車
+    </a>
     <div class="row">
         <s:iterator value="products">
             <div class="col-md-4 mb-4">
