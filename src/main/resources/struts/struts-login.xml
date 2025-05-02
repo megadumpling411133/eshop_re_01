@@ -50,6 +50,8 @@
                 <param name="actionName">list</param>
                 <param name="namespace">/product</param>
             </result>
+            <!-- <result name="success" type="dispatcher">/WEB-INF/views/product/list.jsp</result> -->
+            
         </action>
     </package>
 </struts>

@@ -6,7 +6,7 @@ public class CartDetail {
     private long productId;
     private Integer quantity;
     private Double unitPrice;
-
+    private Product product;
     // ✅ 統一命名：主鍵方法為 getId / setId
     public Integer getId() {
         return detailId;
@@ -54,5 +54,13 @@ public class CartDetail {
 
     public void setUnitPrice(Double unitPrice) {
         this.unitPrice = unitPrice;
+    }
+    
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 }

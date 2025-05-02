@@ -16,7 +16,12 @@
         <action name="view" class="cartViewAction" method="execute">
             <result name="success">/WEB-INF/views/cart/cart.jsp</result>
         </action>
+        <!-- 清空指定使用者的購物車 -->
+		<action name="clear" class="com.example.action.CartClearAction">
+		    <result name="success" type="redirect">/cart/view.action</result>
+		</action>
 
+		
     </package>
 </struts>
 <!-- <!DOCTYPE struts PUBLIC

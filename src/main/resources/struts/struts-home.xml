@@ -52,6 +52,10 @@
         <action name="to_upload" class="com.example.action.HomeAction" method="toUpload">
             <result name="success">/WEB-INF/views/upload/upload.jsp</result>
         </action>
-
+         <!-- 註冊登出 Action -->
+		<action name="logout" class="com.example.action.LogoutAction">
+		    <result name="success" type="redirect">/home.jsp</result>
+		</action>
+	
     </package>
 </struts>

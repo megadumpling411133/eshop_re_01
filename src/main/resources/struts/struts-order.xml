@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+    "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+    <package name="order" namespace="/order" extends="default">
+        <action name="checkout" class="com.example.action.OrderAction">
+            <result name="success">/WEB-INF/views/order/success.jsp</result>
+            <result name="error" type="redirect">/cart/view.action</result>
+        </action>
+    </package>
+</struts>

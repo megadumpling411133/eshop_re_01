@@ -22,8 +22,12 @@ public class CartDaoImpl implements CartDao {
     @Override
     public Cart getCartByUserId(String userId) {
         Cart cart = getSession().createQuery(
-                "from Cart c left join fetch c.details where c.userId = :userId", Cart.class)
-            .setParameter("userId", userId)
+            /*"from Cart c left join fetch c.details where c.userId = :userId", Cart.class)*/
+        	"select distinct c from Cart c " +
+            "left join fetch c.details d " +
+            "left join fetch d.product " +
+            "where c.userId = :userId", Cart.class)
+        	.setParameter("userId", userId)
             .uniqueResult();
 
         // ✅ DEBUG 用
@@ -64,4 +68,12 @@ public class CartDaoImpl implements CartDao {
     public void updateCartDetail(CartDetail detail) {
         getSession().update(detail);
     }
+    
+    @Override
+    public void deleteCartDetailsByCartId(Integer cartId) {
+        getSession().createQuery("delete from CartDetail where cart.id = :cartId")
+            .setParameter("cartId", cartId)
+            .executeUpdate();
+    }
+
 }

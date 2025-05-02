@@ -54,4 +54,13 @@ public class CartServiceImpl implements CartService {
     public Cart getCartByUserId(String userId) {
         return cartDao.getCartByUserId(userId);
     }
+    
+    @Override
+    public void clearCart(String userId) {
+        Cart cart = cartDao.getCartByUserId(userId);
+        if (cart != null) {
+            cartDao.deleteCartDetailsByCartId(cart.getId());
+        }
+    }
+
 }

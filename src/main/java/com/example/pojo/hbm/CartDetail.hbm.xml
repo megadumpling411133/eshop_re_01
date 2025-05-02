@@ -14,5 +14,8 @@
         <property name="productId" column="product_id"/>
         <property name="quantity" column="quantity"/>
         <property name="unitPrice" column="unit_price"/>
+        
+        <!-- ✅ 加入關聯：查出商品名稱 -->
+        <many-to-one name="product" class="com.example.pojo.entity.Product" column="product_id" insert="false" update="false"/>
     </class>
 </hibernate-mapping>

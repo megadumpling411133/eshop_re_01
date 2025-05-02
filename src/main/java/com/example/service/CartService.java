@@ -14,6 +14,8 @@ public interface CartService {
      * @param unitPrice 當下商品價格（BigDecimal）
      */
     void addProductToCart(String userId, long productId, BigDecimal unitPrice);
+    
+    void clearCart(String userId);
 
     /**
      * 取得目前使用者的購物車資料（包含所有明細）

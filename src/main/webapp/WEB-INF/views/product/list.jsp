@@ -10,6 +10,15 @@
 </head>
 <body>
 <div class="container mt-4">
+	<!-- ✅ 右上角登入使用者名稱 + 登出 -->
+    <div class="d-flex justify-content-end mb-3">
+        <c:if test="${not empty sessionScope.session_user}">
+            <span class="me-3 mt-1">👤 歡迎您回來，${sessionScope.session_user.loginId}</span>
+            <%-- <a href="${pageContext.request.contextPath}/logout.action" class="btn btn-outline-danger btn-sm">登出</a> --%>
+            <a href="${pageContext.request.contextPath}/home/logout.action" class="btn btn-outline-danger btn-sm">登出</a>
+            
+        </c:if>
+    </div>
     <h2 class="mb-4">商品列表</h2>
     <a href="${pageContext.request.contextPath}/cart/view.action" class="btn btn-outline-success">
             查看購物車

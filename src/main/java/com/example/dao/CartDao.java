@@ -10,4 +10,6 @@ public interface CartDao {
     void saveCartDetail(CartDetail detail);
     CartDetail getCartDetail(Integer cartId, long productId);
     void updateCartDetail(CartDetail detail);
+    void deleteCartDetailsByCartId(Integer cartId);
+
 }
